@@ -1,6 +1,6 @@
 # Beaver Assistant - Chrome Extension
 
-Beaver Assistant is a voice-enabled Chrome extension that serves as your personal web assistant, powered by Google Cloud APIs. It provides webpage summarization, voice interaction, and intelligent responses to your commands.
+Beaver Assistant is a voice-enabled Chrome extension that serves as your personal web assistant, powered by Google Cloud APIs like Gemini Pro API & Google Cloud Text-to-Speech API. It provides webpage summarization, voice interaction, and intelligent responses to your commands.
 
 ## Features
 
