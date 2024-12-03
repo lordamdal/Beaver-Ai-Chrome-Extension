@@ -1,0 +1,248 @@
+/* Base styles for Beaver Assistant elements */
+#beaver-response-container {
+  --beaver-primary: #1a73e8;
+  --beaver-text: #202124;
+  --beaver-border: #e0e0e0;
+  --beaver-hover: #f1f3f4;
+  --beaver-shadow: rgba(0, 0, 0, 0.15);
+  
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+  box-sizing: border-box;
+}
+
+#beaver-response-container * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Animations */
+@keyframes beaver-slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes beaver-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Loading animation */
+@keyframes beaver-pulse {
+  0% {
+    transform: scale(0.95);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(0.95);
+    opacity: 0.5;
+  }
+}
+
+.beaver-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px;
+}
+
+.beaver-loading-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--beaver-primary);
+  animation: beaver-pulse 1.5s infinite;
+}
+
+.beaver-loading-dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.beaver-loading-dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+/* Response container */
+.beaver-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 350px;
+  max-height: 80vh;
+  overflow-y: auto;
+  background: white;
+  box-shadow: 0 4px 12px var(--beaver-shadow);
+  border-radius: 12px;
+  z-index: 2147483647;
+  animation: beaver-slide-in 0.3s ease-out;
+}
+
+/* Scrollbar styles */
+.beaver-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.beaver-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.beaver-container::-webkit-scrollbar-thumb {
+  background: #bdc1c6;
+  border-radius: 4px;
+}
+
+.beaver-container::-webkit-scrollbar-thumb:hover {
+  background: #9aa0a6;
+}
+
+/* Header */
+.beaver-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--beaver-border);
+  cursor: move;
+  user-select: none;
+}
+
+.beaver-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.beaver-title img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+.beaver-title h3 {
+  font-size: 16px;
+  color: var(--beaver-primary);
+  font-weight: 500;
+}
+
+/* Close button */
+.beaver-close {
+  padding: 4px 8px;
+  background: var(--beaver-hover);
+  border: none;
+  border-radius: 4px;
+  color: #5f6368;
+  cursor: pointer;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: background-color 0.2s;
+}
+
+.beaver-close:hover {
+  background: #e8eaed;
+}
+
+/* Content */
+.beaver-content {
+  padding: 16px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--beaver-text);
+}
+
+/* Response formatting */
+.beaver-content p {
+  margin-bottom: 12px;
+}
+
+.beaver-content ul, 
+.beaver-content ol {
+  margin: 8px 0;
+  padding-left: 24px;
+}
+
+.beaver-content li {
+  margin-bottom: 4px;
+}
+
+.beaver-content code {
+  background: var(--beaver-hover);
+  padding: 2px 4px;
+  border-radius: 4px;
+  font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
+  font-size: 0.9em;
+}
+
+.beaver-content strong {
+  font-weight: 600;
+}
+
+.beaver-content em {
+  font-style: italic;
+}
+
+/* Error state */
+.beaver-error {
+  color: #d93025;
+  padding: 12px;
+  background: #fce8e6;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.beaver-error::before {
+  content: '!';
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  background: #d93025;
+  color: white;
+  border-radius: 50%;
+  font-weight: bold;
+}
+
+/* Success state */
+.beaver-success {
+  color: #137333;
+  padding: 12px;
+  background: #e6f4ea;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.beaver-success::before {
+  content: '✓';
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  background: #137333;
+  color: white;
+  border-radius: 50%;
+  font-weight: bold;
+}

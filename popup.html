@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Beaver Assistant</title>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    body {
+      width: 320px;
+      margin: 0;
+      padding: 16px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+      background-color: #ffffff;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 8px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    .header img {
+      width: 32px;
+      height: 32px;
+    }
+
+    .header h1 {
+      margin: 0;
+      font-size: 20px;
+      color: #1a73e8;
+      font-weight: 500;
+    }
+
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .input-group label {
+      font-size: 14px;
+      color: #5f6368;
+      font-weight: 500;
+    }
+
+    .input-group input {
+      padding: 10px 12px;
+      border: 1px solid #dadce0;
+      border-radius: 8px;
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .input-group input:focus {
+      border-color: #1a73e8;
+      box-shadow: 0 0 0 2px rgba(26, 115, 232, 0.1);
+    }
+
+    .button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 16px;
+      border: none;
+      border-radius: 8px;
+      background-color: #1a73e8;
+      color: white;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+      outline: none;
+    }
+
+    .button:disabled {
+      background-color: #dadce0;
+      cursor: not-allowed;
+    }
+
+    .button:not(:disabled):hover {
+      background-color: #1557b0;
+    }
+
+    .button.secondary {
+      background-color: #fff;
+      border: 1px solid #dadce0;
+      color: #3c4043;
+    }
+
+    .button.secondary:not(:disabled):hover {
+      background-color: #f8f9fa;
+      border-color: #dadce0;
+    }
+
+    .button.listening {
+      background-color: #ea4335;
+    }
+
+    .button.listening:hover {
+      background-color: #d93025;
+    }
+
+    .status {
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 14px;
+      text-align: center;
+      min-height: 20px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .status.show {
+      opacity: 1;
+    }
+
+    .status.success {
+      background-color: #e6f4ea;
+      color: #137333;
+    }
+
+    .status.error {
+      background-color: #fce8e6;
+      color: #c5221f;
+    }
+
+    .status.info {
+      background-color: #e8f0fe;
+      color: #1967d2;
+    }
+
+    .status.listening {
+      background-color: #e8f0fe;
+      color: #1967d2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .status.listening::after {
+      content: '';
+      width: 8px;
+      height: 8px;
+      background-color: currentColor;
+      border-radius: 50%;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(0.8); opacity: 0.5; }
+      50% { transform: scale(1.2); opacity: 1; }
+      100% { transform: scale(0.8); opacity: 0.5; }
+    }
+
+    .divider {
+      height: 1px;
+      background-color: #e0e0e0;
+      margin: 8px 0;
+    }
+ 
+    /* Add to existing styles */
+    .button.stop-speaking {
+      background-color: #dc3545;
+      color: white;
+      display: none; /* Hidden by default */
+    }
+
+    .button.stop-speaking:hover {
+      background-color: #c82333;
+    }
+
+    .button-group {
+      display: flex;
+      gap: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <img src="icons/icon48.png" alt="Beaver Assistant">
+      <h1>Beaver Assistant</h1>
+    </div>
+
+    <div class="input-group">
+      <label for="apiKey">GCP API Key</label>
+      <input type="password" id="apiKey" placeholder="Enter your API key">
+    </div>
+
+    <button id="saveKey" class="button">
+      <i class="fas fa-save"></i>
+      Save API Key
+    </button>
+
+    <div class="divider"></div>
+
+    <button id="toggleVoice" class="button">
+      <i class="fas fa-microphone"></i>
+      Start Listening
+    </button>
+
+    <div class="button-group">
+      <button id="summarize" class="button secondary">
+        <i class="fas fa-file-alt"></i>
+        Summarize Page
+      </button>
+
+      <button id="stopSpeaking" class="button stop-speaking">
+        <i class="fas fa-stop"></i>
+        Stop Speaking
+      </button>
+    </div>
+
+    <div id="status" class="status"></div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
